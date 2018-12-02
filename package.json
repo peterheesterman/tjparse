@@ -1,0 +1,31 @@
+{
+  "name": "tjparse",
+  "private": true,
+  "version": "0.0.1",
+  "description": "Typescript JSON parser",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/peterheesterman/tjparse.git"
+  },
+  "keywords": [
+    "JSON",
+    "parser",
+    "learning"
+  ],
+  "author": "Peter Heesterman <heesterman.peter@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/peterheesterman/tjparse/issues"
+  },
+  "homepage": "https://github.com/peterheesterman/tjparse#readme",
+  "devDependencies": {
+    "@types/node": "10.12.11",
+    "jest": "23.6.0",
+    "typescript": "3.2.1"
+  }
+}
