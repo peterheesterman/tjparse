@@ -1,7 +1,7 @@
-interface Error {
-  description: string
-  lineNumber: number
-  columnNumber: number  
-}
+import { Error } from './Error'
+import { InvalidTokenError } from './InvalidTokenError'
 
-export { Error }
+export { 
+  Error,
+  InvalidTokenError
+}

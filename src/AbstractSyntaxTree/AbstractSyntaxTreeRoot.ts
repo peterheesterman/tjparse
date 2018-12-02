@@ -1,4 +1,4 @@
-import { AbstractSyntaxTreeNode } from './AbstractSyntaxTreeNode'
+import { AbstractSyntaxTreeNode } from './'
 
 class AbstractSyntaxTreeRoot {
   children: Array<AbstractSyntaxTreeNode>;

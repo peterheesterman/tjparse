@@ -1,6 +1,6 @@
 
 import { Result } from './Result'
-import { InvalidTokenError } from './errors/InvalidTokenError'
+import { InvalidTokenError } from './errors'
 
 
 const parse = (input: string): Result => {

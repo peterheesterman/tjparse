@@ -1,9 +1,10 @@
-
-import { readFileSync } from 'fs'
+import { readFileSync, writeFileSync } from 'fs'
 
 import { parse } from './parser'
-import { Result } from './parser/Result'
+import { formatter } from './formatter'
 
+
+// Get command line arguments for running it.
 const args:Array<string> = process.argv.slice(2)
 
 const inputPath: string = args[0]
@@ -19,7 +20,8 @@ if (errors.length !== 0) {
   console.log('no errors making the Abstract Syntax Tree')
 }
 
+const config = {
+  minify: true
+}
 
-// feed ast into formatter
-
-// write to file
+writeFileSync(outputPath, formatter(config)(abstractSyntaxTree))
