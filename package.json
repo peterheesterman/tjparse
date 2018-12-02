@@ -6,6 +6,7 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
+    "start": "rm -r dist && npm run build && node dist/index.js testJSON/correct.json.in testJSON/correct.json.out",
     "test": "jest"
   },
   "repository": {
