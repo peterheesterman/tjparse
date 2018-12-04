@@ -1,8 +1,9 @@
 
-import { Error } from './errors'
-import { AbstractSyntaxTree } from '../AbstractSyntaxTree'
+import { Result } from './Result'
+import { Error } from '../errors'
+import { AbstractSyntaxTree } from '../../AbstractSyntaxTree'
 
-class Result {
+class ParserResult implements Result {
   errors: Array<Error>
   abstractSyntaxTree: AbstractSyntaxTree | null
 
@@ -12,4 +13,4 @@ class Result {
   }
 }
 
-export { Result }
+export { ParserResult }
