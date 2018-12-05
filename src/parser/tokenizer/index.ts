@@ -1,6 +1,6 @@
 
-import { Token } from '../Token'
-import { TokenizerResult } from '../Results'
+import { Token } from '../types/Token'
+import { TokenizerResult } from '../types/Results'
 
 const tokenizer = (input: string): TokenizerResult => {
   const tokens:Array<Token> = []

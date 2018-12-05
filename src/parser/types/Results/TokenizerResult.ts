@@ -1,7 +1,7 @@
 
 import { Result } from './Result'
-import { Error } from '../types/Errors'
-import { Token } from '../types/Token'
+import { Error } from '../Errors'
+import { Token } from '../Token'
 
 class TokenizerResult implements Result {
   errors: Array<Error>

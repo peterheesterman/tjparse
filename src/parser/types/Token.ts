@@ -1,7 +1,4 @@
 
-import { Error } from './Errors'
-import { AbstractSyntaxTree } from '../AbstractSyntaxTree'
-
 class Token {
   literal: string
   lineNumber: number

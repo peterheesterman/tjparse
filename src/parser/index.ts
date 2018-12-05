@@ -1,4 +1,4 @@
-import { ParserResult } from './Results'
+import { ParserResult } from './types/Results'
 
 import { isEmpty } from '../utils/isEmpty'
 

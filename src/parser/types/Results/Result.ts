@@ -1,5 +1,5 @@
 
-import { Error } from '../types/Errors'
+import { Error } from '../Errors'
 
 interface Result {
   errors: Array<Error>

@@ -1,8 +1,8 @@
 
-import { Token } from '../Token'
-import { AnalyzerResult } from '../Results/AnalyzerResult'
-import { AbstractSyntaxTree } from '../../AbstractSyntaxTree'
-import { Error } from '../Errors'
+import { AbstractSyntaxTree } from '../../types/AbstractSyntaxTree'
+import { AnalyzerResult } from '../types/Results/AnalyzerResult'
+import { Error } from '../types/Errors'
+import { Token } from '../types/Token'
 
 const analyzer = (tokens: Array<Token>): AnalyzerResult => {
   tokens.forEach(element => {

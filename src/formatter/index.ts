@@ -1,5 +1,5 @@
 
-import { AbstractSyntaxTree } from '../AbstractSyntaxTree'
+import { AbstractSyntaxTree } from '../types/AbstractSyntaxTree'
 
 interface $config {
   minify: boolean

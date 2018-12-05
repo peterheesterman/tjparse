@@ -1,4 +1,4 @@
-import 'ts-jest'
+import 'ts-jest/utils'
 
 import { isEmpty } from './isEmpty'
 /*
