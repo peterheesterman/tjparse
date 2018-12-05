@@ -1,26 +1,21 @@
+import { ParserResult } from './Results'
 
 import { isEmpty } from '../utils/isEmpty'
-
-import { ParserResult } from './Results'
-import { Error, InvalidTokenError } from './errors'
 
 import { tokenizer } from './tokenizer'
 import { analyzer } from './analyzer'
 
 const parse = (input: string): ParserResult => {
-
-  let { errors, tokens} = tokenizer(input)
-  if (!isEmpty(errors)) {
-    return new ParserResult(errors, null)
+  // Get tokens
+  const { errors: tokenizerErrors , tokens} = tokenizer(input)
+  if (!isEmpty(tokenizerErrors)) {
+    return new ParserResult(tokenizerErrors, null)
   }
 
-  // bubble up erros like above - add the other result type
-  const abstractSyntaxTree = analyzer(tokens)
-
-  errors = [new InvalidTokenError("ops", 1, 1)]
-
-  if (!isEmpty(errors)) {
-    return new ParserResult(errors, null)
+  // Make AbstractSyntaxTree from tokens
+  const { errors: analyzerErrors, abstractSyntaxTree } = analyzer(tokens)
+  if (!isEmpty(analyzerErrors)) {
+    return new ParserResult(analyzerErrors, null)
   }
 
   return new ParserResult([], abstractSyntaxTree)

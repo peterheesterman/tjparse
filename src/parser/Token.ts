@@ -1,5 +1,5 @@
 
-import { Error } from './errors'
+import { Error } from './Errors'
 import { AbstractSyntaxTree } from '../AbstractSyntaxTree'
 
 class Token {

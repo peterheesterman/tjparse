@@ -1,6 +1,6 @@
 
 import { Result } from './Result'
-import { Error } from '../errors'
+import { Error } from '../Errors'
 import { Token } from '../Token'
 
 class TokenizerResult implements Result {
