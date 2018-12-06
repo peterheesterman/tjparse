@@ -1,7 +1,7 @@
 import 'ts-jest/utils'
 
 import { tokenizer } from '.'
-import { BraceOpen, BraceClose, Word, Colon } from '../../types/Tokens';
+import { BraceOpen, BraceClose, Word, Colon } from '../../types/Tokens'
 
 test('braces should be tokenized', () => {
   const json = `{}`

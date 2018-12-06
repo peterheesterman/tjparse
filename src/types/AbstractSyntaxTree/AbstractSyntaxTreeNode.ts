@@ -1,6 +1,6 @@
 class AbstractSyntaxTreeNode {
-  parent: AbstractSyntaxTreeNode;
-  children: Array<AbstractSyntaxTreeNode>;
+  parent: AbstractSyntaxTreeNode
+  children: Array<AbstractSyntaxTreeNode>
 }
 
 export { AbstractSyntaxTreeNode }

@@ -1,7 +1,7 @@
 import 'ts-jest/utils'
 
 import { tokenizer } from '.'
-import { BraceOpen, BraceClose, Word, Colon } from '../../types/Tokens';
+import { BraceOpen, BraceClose, Word, Colon } from '../../types/Tokens'
 
 test('Simple word word json should pass', () => {
   const json = `{ "key": "value" }`
