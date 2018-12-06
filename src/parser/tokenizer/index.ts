@@ -8,7 +8,10 @@ import {
   braceOpen,
   braceClose,
   doubleQuote,
-  colon
+  colon,
+  comma,
+  braketClose,
+  braketOpen
 } from '../../types/Tokens/literals'
 
 import { switchSingleton } from './Singletons/switchSingleton'
@@ -34,6 +37,9 @@ const tokenizer = (input: string): TokenizerResult => {
       case braceOpen: 
       case braceClose:
       case colon:
+      case comma:
+      case braketOpen:
+      case braketClose:
         // singletons
         tokens.push(switchSingleton(element, lineNumber, columnNumber))
         break

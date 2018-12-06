@@ -23,7 +23,8 @@ AST -> string
 
 ## Next steps
   - make the tokenizer
-    - null, [, ], true, false, comma
+    - singletons - comma, [, ]
+    - null, true, false
     - number (can start with a .?) - too remember
     - analyze weaknesses and stregths of the approach
   - make the analyzer

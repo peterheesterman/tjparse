@@ -1,6 +1,6 @@
 
-import { Token, BraceOpen, BraceClose, Colon } from '../../../types/Tokens'
-import { braceOpen, braceClose, colon } from '../../../types/Tokens/literals'
+import { Token, BraceOpen, BraceClose, Colon, Comma, BraketOpen, BraketClose } from '../../../types/Tokens'
+import { braceOpen, braceClose, colon, braketClose, braketOpen, comma } from '../../../types/Tokens/literals'
 
 const switchSingleton = (
   literal: string,
@@ -14,6 +14,12 @@ const switchSingleton = (
       return new BraceClose(lineNumber, columnNumber)
     case colon:
       return new Colon(lineNumber, columnNumber)
+    case comma:
+      return new Comma(lineNumber, columnNumber)
+    case braketOpen:
+      return new BraketOpen(lineNumber, columnNumber)
+    case braketClose:
+      return new BraketClose(lineNumber, columnNumber)
   }
 }
 

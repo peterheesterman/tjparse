@@ -6,7 +6,9 @@ import { Token } from './Token'
 import { BraceOpen } from './BraceOpen'
 import { BraceClose } from './BraceClose'
 import { Colon } from './Colon'
-
+import { Comma } from './Comma'
+import { BraketOpen } from './BraketOpen'
+import { BraketClose } from './BraketClose'
 import { Word } from './Word'
 
 export {
@@ -14,5 +16,8 @@ export {
   BraceOpen,
   BraceClose,
   Colon,
+  Comma,
+  BraketOpen,
+  BraketClose,
   Word
 }
