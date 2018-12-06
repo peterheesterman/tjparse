@@ -1,5 +1,7 @@
 
-class Token {
+import { Token } from '..'
+
+class Word implements Token {
   literal: string
   lineNumber: number
   columnNumber: number
@@ -11,4 +13,4 @@ class Token {
   }
 }
 
-export { Token }
+export { Word }

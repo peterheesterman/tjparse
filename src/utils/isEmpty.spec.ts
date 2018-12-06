@@ -1,12 +1,6 @@
 import 'ts-jest/utils'
 
 import { isEmpty } from './isEmpty'
-/*
-Test empty
-
-  - throw if not an array.
-
-*/
 
 test('empty array', () => {
   expect(isEmpty([])).toBe(true)

@@ -2,7 +2,7 @@
 import { AbstractSyntaxTree } from '../../types/AbstractSyntaxTree'
 import { AnalyzerResult } from '../types/Results/AnalyzerResult'
 import { Error } from '../types/Errors'
-import { Token } from '../types/Token'
+import { Token } from '../../types/Tokens'
 
 const analyzer = (tokens: Array<Token>): AnalyzerResult => {
   tokens.forEach(element => {
