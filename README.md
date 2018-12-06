@@ -23,9 +23,8 @@ AST -> string
 
 ## Next steps
   - make the tokenizer
-    - tests
-    - document
-    - code
+    - null, [, ], true, false, comma
+    - number (can start with a .?) - too remember
     - analyze weaknesses and stregths of the approach
   - make the analyzer
     - tests
