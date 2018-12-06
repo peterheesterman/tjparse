@@ -2,7 +2,7 @@
 import { TokenizerResult } from '../types/Results'
 
 import { Error, InvalidTokenError } from '../types/Errors'
-import { Token, BraceOpen, BraceClose, Word, Colon } from '../../types/Tokens'
+import { Token, Word } from '../../types/Tokens'
 
 import {
   braceOpen,
@@ -11,6 +11,7 @@ import {
   colon
 } from '../../types/Tokens/literals'
 
+import { switchSingleton } from './Singletons/switchSingleton'
 import { findEndOfWord } from '../../types/Tokens/Word/findEndOfWord'
 
 const tokenizer = (input: string): TokenizerResult => {
@@ -30,14 +31,11 @@ const tokenizer = (input: string): TokenizerResult => {
       case "\r":
         // eat whitespace
         break
-      case braceOpen:
-        tokens.push(new BraceOpen(lineNumber, columnNumber))
-        break
+      case braceOpen: 
       case braceClose:
-        tokens.push(new BraceClose(lineNumber, columnNumber))
-        break
       case colon:
-        tokens.push(new Colon(lineNumber, columnNumber))
+        // singletons
+        tokens.push(switchSingleton(element, lineNumber, columnNumber))
         break
       case doubleQuote:
         const wordLength = findEndOfWord(input, columnNumber)
