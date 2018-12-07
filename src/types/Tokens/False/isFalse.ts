@@ -1,7 +1,7 @@
 import { isLiteralChecker } from '../tokenUtils'
 
-const isNull = isLiteralChecker("null")
+const isFalse = isLiteralChecker("false")
 
 export {
-  isNull
+  isFalse
 }

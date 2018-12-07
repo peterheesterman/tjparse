@@ -2,7 +2,7 @@ import 'ts-jest/utils'
 
 import { tokenizer } from '.'
 import { BraceOpen, BraceClose, Word, Colon, BraketClose, BraketOpen, Comma } from '../../types/Tokens'
-import { UnterminatedStringError, InvalidTokenError } from '../types/Errors';
+import { UnterminatedStringError, InvalidTokenError } from '../types/Errors'
 
 test('braces should be tokenized', () => {
   const json = `{}`

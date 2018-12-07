@@ -34,7 +34,7 @@ const tokenizer = (input: string): TokenizerResult => {
   const errors: Array<Error> = []
 
   let lineNumber = 1
-  let columnNumber = 1;
+  let columnNumber = 1
   characterLoop: for (let characterNumber = 1; characterNumber - 1 < characters.length; characterNumber++) {
     const element = characters[characterNumber - 1]
     
