@@ -1,17 +1,16 @@
 
-import { Token } from '.'
-import { braketOpen } from './literals'
+import { Token } from '..'
 
-class BraketOpen implements Token {
+class Null implements Token {
   literal: string
   lineNumber: number
   columnNumber: number
 
   constructor(lineNumber: number, columnNumber: number) {
-    this.literal = braketOpen
+    this.literal = "null"
     this.lineNumber = lineNumber
     this.columnNumber = columnNumber
   }
 }
 
-export { BraketOpen }
+export { Null }

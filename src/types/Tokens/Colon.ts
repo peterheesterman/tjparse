@@ -12,10 +12,6 @@ class Colon implements Token {
     this.lineNumber = lineNumber
     this.columnNumber = columnNumber
   }
-
-  getLiteral() {
-    return this.literal
-  }
 }
 
 export { Colon }

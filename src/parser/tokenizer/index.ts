@@ -1,4 +1,5 @@
 
+import { isEmpty } from '../../utils/isEmpty'
 import { TokenizerResult } from '../types/Results'
 
 import { 
@@ -16,10 +17,14 @@ import {
   colon,
   comma,
   braketClose,
-  braketOpen
+  braketOpen,
+  n,
+  f,
+  t
 } from '../../types/Tokens/literals'
 
 import { switchSingleton } from './Singletons/switchSingleton'
+import { switchCompound } from './Compounds/switchCompound'
 import { findEndOfWord } from '../../types/Tokens/Word/findEndOfWord'
 
 const tokenizer = (input: string): TokenizerResult => {
@@ -53,16 +58,23 @@ const tokenizer = (input: string): TokenizerResult => {
         tokens.push(switchSingleton(element, lineNumber, columnNumber))
         break
       case doubleQuote:
-        const wordLength = findEndOfWord(input, characterNumber)
-        if (wordLength !== -1) {
-          const wordLiteral = doubleQuote + input.substr(columnNumber, wordLength)
-          tokens.push(new Word(wordLiteral, lineNumber, columnNumber))
-          characterNumber = characterNumber + wordLength
-          columnNumber = columnNumber + wordLength
-        } else {
-          errors.push(new UnterminatedStringError(lineNumber, columnNumber))
+      case n: // null
+      case f: // false
+      case t: // true
+        const { 
+          token, 
+          tokenLength,
+          error: compoundError 
+        } = switchCompound({ element, input, lineNumber, columnNumber, characterNumber })
+
+        if (compoundError != null) {
+          errors.push(compoundError)
           break characterLoop
         }
+
+        tokens.push(token)
+        columnNumber += tokenLength
+        characterNumber += tokenLength
         break
       default:
         errors.push(new InvalidTokenError(element, lineNumber, columnNumber))

@@ -6,6 +6,9 @@ const colon = ':'
 const comma = ','
 const braketOpen = '['
 const braketClose = ']'
+const n = "n"
+const f = "f"
+const t = "t"
 
 export {
   braceOpen,
@@ -14,5 +17,8 @@ export {
   colon,
   comma,
   braketOpen,
-  braketClose
+  braketClose,
+  n,
+  f,
+  t
 }
