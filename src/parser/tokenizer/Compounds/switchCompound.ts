@@ -5,12 +5,8 @@ import { doubleQuote, n, f, t } from '../../../types/Tokens/literals'
 import { findEndOfWord } from '../../../types/Tokens/Word/findEndOfWord'
 import { UnterminatedStringError } from '../../types/Errors'
 import { UnexpectedLiteral } from '../../types/Errors/UnexpectedToken'
-import { isNull } from '../../../types/Tokens/Null/isNull'
-import { isTrue } from '../../../types/Tokens/True/isTrue';
-import { isFalse } from '../../../types/Tokens/False/isFalse';
-import { False } from '../../../types/Tokens/False';
-import { True } from '../../../types/Tokens/True';
 
+import { getCheckAndType } from './compoundStatic'
 interface $input {
   element: string
   input: string
@@ -45,19 +41,16 @@ const switchCompound = ({
     case n: // null
     case t: // true
     case f: // false
-      const literals = [n, t, f]
-      const index = literals.indexOf(element)
-      const checks = [isNull, isTrue, isFalse]
-      const tokenTypes = [Null, True, False]
+      const { check, tokenType } = getCheckAndType(element)
 
-      if (checks[index](input, characterNumber)) {
-        token = new (tokenTypes[index])(lineNumber, columnNumber)
+      if (check(input, characterNumber)) {
+        token = new tokenType(lineNumber, columnNumber)
         tokenLength = token.literal.length
       } else {
         error = new UnexpectedLiteral(lineNumber, columnNumber)
       }
+      break
   }
-
   return {
     tokenLength,
     token,
