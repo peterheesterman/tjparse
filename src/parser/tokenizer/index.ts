@@ -1,7 +1,12 @@
 
 import { TokenizerResult } from '../types/Results'
 
-import { Error, InvalidTokenError } from '../types/Errors'
+import { 
+  Error, 
+  InvalidTokenError,
+  UnterminatedStringError
+} from '../types/Errors'
+
 import { Token, Word } from '../../types/Tokens'
 
 import {
@@ -23,16 +28,20 @@ const tokenizer = (input: string): TokenizerResult => {
   const tokens: Array<Token> = []
   const errors: Array<Error> = []
 
-  for (let columnNumber = 1; columnNumber - 1 < characters.length; columnNumber++) {
-    const lineNumber = 1
-    const element = characters[columnNumber - 1]
+  let lineNumber = 1
+  let columnNumber = 1;
+  characterLoop: for (let characterNumber = 1; characterNumber - 1 < characters.length; characterNumber++) {
+    const element = characters[characterNumber - 1]
     
     switch (element) {
       case " ":
       case "\t":
-      case "\n":
       case "\r":
-        // eat whitespace
+      // eat whitespace
+        break
+      case "\n":
+        lineNumber += 1
+        columnNumber = 0
         break
       case braceOpen: 
       case braceClose:
@@ -44,15 +53,22 @@ const tokenizer = (input: string): TokenizerResult => {
         tokens.push(switchSingleton(element, lineNumber, columnNumber))
         break
       case doubleQuote:
-        const wordLength = findEndOfWord(input, columnNumber)
-        const wordLiteral = doubleQuote + input.substr(columnNumber, wordLength)
-        tokens.push(new Word(wordLiteral, lineNumber, columnNumber))
-        columnNumber = columnNumber + wordLength
+        const wordLength = findEndOfWord(input, characterNumber)
+        if (wordLength !== -1) {
+          const wordLiteral = doubleQuote + input.substr(columnNumber, wordLength)
+          tokens.push(new Word(wordLiteral, lineNumber, columnNumber))
+          characterNumber = characterNumber + wordLength
+          columnNumber = columnNumber + wordLength
+        } else {
+          errors.push(new UnterminatedStringError(lineNumber, columnNumber))
+          break characterLoop
+        }
         break
       default:
         errors.push(new InvalidTokenError(element, lineNumber, columnNumber))
-        break
+        break characterLoop
     }
+    columnNumber += 1
   }
 
   return new TokenizerResult(errors, tokens)
