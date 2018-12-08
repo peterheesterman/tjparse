@@ -1,12 +1,16 @@
 
 import { Error } from '../../types/Errors'
-import { Token, Word, Null } from '../../../types/Tokens'
+import { Token, Word, Number } from '../../../types/Tokens'
 import { doubleQuote, n, f, t } from '../../../types/Tokens/literals'
 import { findEndOfWord } from '../../../types/Tokens/Word/findEndOfWord'
-import { UnterminatedStringError } from '../../types/Errors'
-import { UnexpectedLiteral } from '../../types/Errors/UnexpectedToken'
-
 import { getCheckAndType } from './compoundStatic'
+import { findEndOfNumber } from '../../../types/Tokens/Number/findEndOfNumber'
+import { 
+  UnterminatedStringError,
+  NumberParseError,
+  UnexpectedTokenError
+} from '../../types/Errors'
+
 interface $input {
   element: string
   input: string
@@ -27,7 +31,7 @@ const switchCompound = ({
   let tokenLength: number = -1
   let token: Token =  null
   let error: Error = null
-  
+
   switch (element) {
     case doubleQuote:
       tokenLength = findEndOfWord(input, characterNumber)
@@ -47,7 +51,26 @@ const switchCompound = ({
         token = new tokenType(lineNumber, columnNumber)
         tokenLength = token.literal.length
       } else {
-        error = new UnexpectedLiteral(lineNumber, columnNumber)
+        error = new UnexpectedTokenError(lineNumber, columnNumber)
+      }
+      break
+    case "-":
+    case "0":
+    case "1":
+    case "2":
+    case "3":
+    case "4":
+    case "5":
+    case "6":
+    case "7":
+    case "8":
+    case "9":
+      tokenLength = findEndOfNumber(input, characterNumber - 1)
+      if (tokenLength !== -1) {
+        const numberLiteral = input.substr(characterNumber - 1, tokenLength)
+        token = new Number(numberLiteral, lineNumber, columnNumber)
+      } else {
+        error = new NumberParseError(lineNumber, columnNumber)
       }
       break
   }

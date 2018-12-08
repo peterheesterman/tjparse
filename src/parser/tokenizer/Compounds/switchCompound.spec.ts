@@ -1,12 +1,12 @@
 
 import 'ts-jest/utils'
 
-import { Error, UnterminatedStringError } from '../../types/Errors'
-import { Word, Token, Null } from '../../../types/Tokens'
+import { Error, UnterminatedStringError, NumberParseError } from '../../types/Errors'
+import { Word, Token, Null, Number } from '../../../types/Tokens'
 import { switchCompound } from './switchCompound'
-import { UnexpectedLiteral } from '../../types/Errors/UnexpectedToken'
-import { True } from '../../../types/Tokens/True';
-import { False } from '../../../types/Tokens/False';
+import { UnexpectedTokenError } from '../../types/Errors'
+import { True } from '../../../types/Tokens/True'
+import { False } from '../../../types/Tokens/False'
 
 test('word can be picked out as a compound token', () => {
   const compound = {
@@ -73,7 +73,7 @@ test('nult is an unexpected token', () => {
 
   const token: Token = null
   const result =  {
-    error: new UnexpectedLiteral(1, 1),
+    error: new UnexpectedTokenError(1, 1),
     token,
     tokenLength: -1
   }
@@ -109,7 +109,7 @@ test('truu is an unexpected token', () => {
 
   const token: Token = null
   const result =  {
-    error: new UnexpectedLiteral(1, 1),
+    error: new UnexpectedTokenError(1, 1),
     token,
     tokenLength: -1
   }
@@ -145,7 +145,61 @@ test('faaaaaaaa is an unexpected token', () => {
 
   const token: Token = null
   const result =  {
-    error: new UnexpectedLiteral(1, 1),
+    error: new UnexpectedTokenError(1, 1),
+    token,
+    tokenLength: -1
+  }
+  expect(switchCompound(compound)).toEqual(result)
+})
+
+test('numbers are tokens', () => {
+  const compound = {
+    element: '-',
+    input: '-343.343',
+    lineNumber: 1,
+    columnNumber: 1,
+    characterNumber: 1
+  }
+
+  const error: Error = null 
+  const result = {
+    tokenLength: 8,
+    token: new Number('-343.343', 1, 1),
+    error
+  }
+  expect(switchCompound(compound)).toEqual(result)
+})
+
+test('numbers are tokens - two', () => {
+  const compound = {
+    element: '2',
+    input: '2',
+    lineNumber: 1,
+    columnNumber: 1,
+    characterNumber: 1
+  }
+
+  const error: Error = null 
+  const result = {
+    tokenLength: 1,
+    token: new Number('2', 1, 1),
+    error
+  }
+  expect(switchCompound(compound)).toEqual(result)
+})
+
+test('fail number', () => {
+  const compound = {
+    element: '-',
+    input: '-',
+    lineNumber: 1,
+    columnNumber: 1,
+    characterNumber: 1
+  }
+
+  const token: Token = null
+  const result =  {
+    error: new NumberParseError(1, 1),
     token,
     tokenLength: -1
   }

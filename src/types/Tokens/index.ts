@@ -10,6 +10,7 @@ import { Comma } from './Comma'
 import { BraketOpen } from './BraketOpen'
 import { BraketClose } from './BraketClose'
 import { Word } from './Word'
+import { Number } from './Number'
 import { Null } from './Null'
 
 export {
@@ -21,5 +22,6 @@ export {
   BraketOpen,
   BraketClose,
   Word,
+  Number,
   Null
 }

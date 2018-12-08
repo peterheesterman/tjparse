@@ -1,7 +1,7 @@
 
 import { Error } from '.'
 
-class UnexpectedLiteral implements Error {
+class UnexpectedTokenError implements Error {
   description: string
   lineNumber: number
   columnNumber: number
@@ -13,4 +13,4 @@ class UnexpectedLiteral implements Error {
   }
 }
 
-export { UnexpectedLiteral }
+export { UnexpectedTokenError }

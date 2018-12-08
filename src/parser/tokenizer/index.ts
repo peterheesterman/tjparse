@@ -57,7 +57,18 @@ const tokenizer = (input: string): TokenizerResult => {
         // singletons
         tokens.push(switchSingleton(element, lineNumber, columnNumber))
         break
-      case doubleQuote:
+      case "-":
+      case "0":
+      case "1":
+      case "2":
+      case "3":
+      case "4":
+      case "5":
+      case "6":
+      case "7":
+      case "8":
+      case "9":
+      case doubleQuote: // word
       case n: // null
       case f: // false
       case t: // true
