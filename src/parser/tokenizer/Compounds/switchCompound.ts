@@ -27,12 +27,12 @@ const switchCompound = ({
   let tokenLength: number = -1
   let token: Token =  null
   let error: Error = null
-
+  
   switch (element) {
     case doubleQuote:
       tokenLength = findEndOfWord(input, characterNumber)
       if (tokenLength !== -1) {
-        const wordLiteral = doubleQuote + input.substr(columnNumber, tokenLength)
+        const wordLiteral = doubleQuote + input.substr(characterNumber, tokenLength)
         token = new Word(wordLiteral, lineNumber, columnNumber)
       } else {
         error = new UnterminatedStringError(lineNumber, columnNumber)
