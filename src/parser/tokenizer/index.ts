@@ -34,10 +34,9 @@ const tokenizer = (input: string): TokenizerResult => {
   const errors: Array<Error> = []
 
   let lineNumber = 1
-  let columnNumber = 1
-  characterLoop: for (let characterNumber = 1; characterNumber - 1 < characters.length; characterNumber++) {
-    const element = characters[characterNumber - 1]
-    
+  let columnNumber = 0
+  characterLoop: for (let characterNumber = 0; characterNumber < characters.length; characterNumber++) {
+    const element = characters[characterNumber]
     switch (element) {
       case " ":
       case "\t":
@@ -74,18 +73,18 @@ const tokenizer = (input: string): TokenizerResult => {
       case t: // true
         const { 
           token, 
-          tokenLength,
+          jump,
           error: compoundError 
         } = switchCompound({ element, input, lineNumber, columnNumber, characterNumber })
-
+        
         if (compoundError != null) {
           errors.push(compoundError)
           break characterLoop
         }
 
         tokens.push(token)
-        columnNumber += tokenLength
-        characterNumber += tokenLength
+        columnNumber += jump
+        characterNumber += jump
         break
       default:
         errors.push(new InvalidTokenError(element, lineNumber, columnNumber))

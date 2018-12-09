@@ -14,12 +14,12 @@ test('word can be picked out as a compound token', () => {
     input: '"win"',
     lineNumber: 1,
     columnNumber: 1,
-    characterNumber: 1
+    characterNumber: 0
   }
 
   const error: Error = null 
   const result = {
-    tokenLength: 4,
+    jump: 4,
     token: new Word('"win"', 1, 1),
     error
   }
@@ -32,14 +32,14 @@ test('Unterminated string error', () => {
     input: '"fajdkljflks',
     lineNumber: 1,
     columnNumber: 1,
-    characterNumber: 1
+    characterNumber: 0
   }
 
   const token: Token = null
   const result =  {
     error: new UnterminatedStringError(1, 1),
     token,
-    tokenLength: -1
+    jump: -1
   }
   expect(switchCompound(compound)).toEqual(result)
 })
@@ -50,12 +50,12 @@ test('null is fine', () => {
     input: 'null',
     lineNumber: 1,
     columnNumber: 1,
-    characterNumber: 1
+    characterNumber: 0
   }
 
   const error: Error = null 
   const result = {
-    tokenLength: 4,
+    jump: 3,
     token: new Null(1, 1),
     error
   }
@@ -68,14 +68,14 @@ test('nult is an unexpected token', () => {
     input: 'nult',
     lineNumber: 1,
     columnNumber: 1,
-    characterNumber: 1
+    characterNumber: 0
   }
 
   const token: Token = null
   const result =  {
     error: new UnexpectedTokenError(1, 1),
     token,
-    tokenLength: -1
+    jump: -1
   }
   expect(switchCompound(compound)).toEqual(result)
 })
@@ -86,12 +86,12 @@ test('true is fine', () => {
     input: 'true',
     lineNumber: 1,
     columnNumber: 1,
-    characterNumber: 1
+    characterNumber: 0
   }
 
   const error: Error = null 
   const result = {
-    tokenLength: 4,
+    jump: 3,
     token: new True(1, 1),
     error
   }
@@ -104,14 +104,14 @@ test('truu is an unexpected token', () => {
     input: 'truu',
     lineNumber: 1,
     columnNumber: 1,
-    characterNumber: 1
+    characterNumber: 0
   }
 
   const token: Token = null
   const result =  {
     error: new UnexpectedTokenError(1, 1),
     token,
-    tokenLength: -1
+    jump: -1
   }
   expect(switchCompound(compound)).toEqual(result)
 })
@@ -119,7 +119,7 @@ test('truu is an unexpected token', () => {
 test('false is fine', () => {
   const compound = {
     element: 'f',
-    input: 'false',
+    input: ' false',
     lineNumber: 1,
     columnNumber: 1,
     characterNumber: 1
@@ -127,7 +127,7 @@ test('false is fine', () => {
 
   const error: Error = null 
   const result = {
-    tokenLength: 5,
+    jump: 4,
     token: new False(1, 1),
     error
   }
@@ -140,14 +140,14 @@ test('faaaaaaaa is an unexpected token', () => {
     input: 'faaaaaaaa',
     lineNumber: 1,
     columnNumber: 1,
-    characterNumber: 1
+    characterNumber: 0
   }
 
   const token: Token = null
   const result =  {
     error: new UnexpectedTokenError(1, 1),
     token,
-    tokenLength: -1
+    jump: -1
   }
   expect(switchCompound(compound)).toEqual(result)
 })
@@ -158,12 +158,12 @@ test('numbers are tokens', () => {
     input: '-343.343',
     lineNumber: 1,
     columnNumber: 1,
-    characterNumber: 1
+    characterNumber: 0
   }
 
   const error: Error = null 
   const result = {
-    tokenLength: 8,
+    jump: 7,
     token: new Number('-343.343', 1, 1),
     error
   }
@@ -176,12 +176,12 @@ test('numbers are tokens - two', () => {
     input: '2',
     lineNumber: 1,
     columnNumber: 1,
-    characterNumber: 1
+    characterNumber: 0
   }
 
   const error: Error = null 
   const result = {
-    tokenLength: 1,
+    jump: 0,
     token: new Number('2', 1, 1),
     error
   }
@@ -201,7 +201,7 @@ test('fail number', () => {
   const result =  {
     error: new NumberParseError(1, 1),
     token,
-    tokenLength: -1
+    jump: -1
   }
   expect(switchCompound(compound)).toEqual(result)
 })
