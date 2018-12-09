@@ -10,8 +10,8 @@ test('braces should be tokenized', () => {
 
   expect(errors.length).toBe(0)
   expect(tokens.length).toBe(2)
-  expect(tokens[0]).toEqual(new BraceOpen(1, 1))
-  expect(tokens[1]).toEqual(new BraceClose(1, 2))
+  expect(tokens[0]).toEqual(new BraceOpen(1, 0))
+  expect(tokens[1]).toEqual(new BraceClose(1, 1))
 })
 
 test('words should be tokenized', () => {
@@ -20,7 +20,7 @@ test('words should be tokenized', () => {
   
   expect(errors.length).toBe(0)
   expect(tokens.length).toBe(1)
-  expect(tokens[0]).toEqual(new Word('"wo 123 rd"', 1, 1))
+  expect(tokens[0]).toEqual(new Word('"wo 123 rd"', 1, 0))
 })
 
 test('colons should be tokenized', () => {
@@ -29,7 +29,7 @@ test('colons should be tokenized', () => {
   
   expect(errors.length).toBe(0)
   expect(tokens.length).toBe(1)
-  expect(tokens[0]).toEqual(new Colon(1, 1))
+  expect(tokens[0]).toEqual(new Colon(1, 0))
 })
 
 test('arrays should be tokenized', () => {
@@ -38,8 +38,8 @@ test('arrays should be tokenized', () => {
   
   expect(errors.length).toBe(0)
   expect(tokens.length).toBe(2)
-  expect(tokens[0]).toEqual(new BraketOpen(1, 1))
-  expect(tokens[1]).toEqual(new BraketClose(1, 2))
+  expect(tokens[0]).toEqual(new BraketOpen(1, 0))
+  expect(tokens[1]).toEqual(new BraketClose(1, 1))
 })
 
 test('commas should be tokenized', () => {
@@ -48,7 +48,7 @@ test('commas should be tokenized', () => {
   
   expect(errors.length).toBe(0)
   expect(tokens.length).toBe(1)
-  expect(tokens[0]).toEqual(new Comma(1, 3))
+  expect(tokens[0]).toEqual(new Comma(1, 2))
 })
 
 test('Unterminated string literal', () => {
@@ -56,7 +56,7 @@ test('Unterminated string literal', () => {
   const { tokens, errors } = tokenizer(json)
   
   expect(errors.length).toBe(1)
-  expect(errors[0]).toEqual(new UnterminatedStringError(1, 2))
+  expect(errors[0]).toEqual(new UnterminatedStringError(1, 1))
 })
 
 test('Invalid character', () => {
@@ -64,7 +64,7 @@ test('Invalid character', () => {
   const { tokens, errors } = tokenizer(json)
   
   expect(errors.length).toBe(1)
-  expect(errors[0]).toEqual(new InvalidTokenError('*', 1, 4))
+  expect(errors[0]).toEqual(new InvalidTokenError('*', 1, 3))
 })
 
 test('Invalid character on new line', () => {

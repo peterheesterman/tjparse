@@ -7,7 +7,7 @@ class NumberParseError implements Error {
   columnNumber: number
 
   constructor(lineNumber: number, columnNumber: number) {
-    this.description = `Unterminated string literal`
+    this.description = `number parser error`
     this.lineNumber = lineNumber
     this.columnNumber =columnNumber
   }
