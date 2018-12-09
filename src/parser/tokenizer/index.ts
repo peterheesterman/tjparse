@@ -73,7 +73,7 @@ const tokenizer = (input: string): TokenizerResult => {
       case t: // true
         const { 
           token, 
-          jump,
+          endJump,
           error: compoundError 
         } = switchCompound({ element, input, lineNumber, columnNumber, characterNumber })
         
@@ -83,8 +83,8 @@ const tokenizer = (input: string): TokenizerResult => {
         }
 
         tokens.push(token)
-        columnNumber += jump
-        characterNumber += jump
+        columnNumber += endJump
+        characterNumber += endJump
         break
       default:
         errors.push(new InvalidTokenError(element, lineNumber, columnNumber))

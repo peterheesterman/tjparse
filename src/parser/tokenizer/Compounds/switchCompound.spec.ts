@@ -19,7 +19,7 @@ test('word can be picked out as a compound token', () => {
 
   const error: Error = null 
   const result = {
-    jump: 4,
+    endJump: 4,
     token: new Word('"win"', 1, 1),
     error
   }
@@ -39,7 +39,7 @@ test('Unterminated string error', () => {
   const result =  {
     error: new UnterminatedStringError(1, 1),
     token,
-    jump: -1
+    endJump: -1
   }
   expect(switchCompound(compound)).toEqual(result)
 })
@@ -55,7 +55,7 @@ test('null is fine', () => {
 
   const error: Error = null 
   const result = {
-    jump: 3,
+    endJump: 3,
     token: new Null(1, 1),
     error
   }
@@ -75,7 +75,7 @@ test('nult is an unexpected token', () => {
   const result =  {
     error: new UnexpectedTokenError(1, 1),
     token,
-    jump: -1
+    endJump: -1
   }
   expect(switchCompound(compound)).toEqual(result)
 })
@@ -91,7 +91,7 @@ test('true is fine', () => {
 
   const error: Error = null 
   const result = {
-    jump: 3,
+    endJump: 3,
     token: new True(1, 1),
     error
   }
@@ -111,7 +111,7 @@ test('truu is an unexpected token', () => {
   const result =  {
     error: new UnexpectedTokenError(1, 1),
     token,
-    jump: -1
+    endJump: -1
   }
   expect(switchCompound(compound)).toEqual(result)
 })
@@ -127,7 +127,7 @@ test('false is fine', () => {
 
   const error: Error = null 
   const result = {
-    jump: 4,
+    endJump: 4,
     token: new False(1, 1),
     error
   }
@@ -147,7 +147,7 @@ test('faaaaaaaa is an unexpected token', () => {
   const result =  {
     error: new UnexpectedTokenError(1, 1),
     token,
-    jump: -1
+    endJump: -1
   }
   expect(switchCompound(compound)).toEqual(result)
 })
@@ -163,7 +163,7 @@ test('numbers are tokens', () => {
 
   const error: Error = null 
   const result = {
-    jump: 7,
+    endJump: 7,
     token: new Number('-343.343', 1, 1),
     error
   }
@@ -181,7 +181,7 @@ test('numbers are tokens - two', () => {
 
   const error: Error = null 
   const result = {
-    jump: 0,
+    endJump: 0,
     token: new Number('2', 1, 1),
     error
   }
@@ -201,7 +201,7 @@ test('fail number', () => {
   const result =  {
     error: new NumberParseError(1, 1),
     token,
-    jump: -1
+    endJump: -1
   }
   expect(switchCompound(compound)).toEqual(result)
 })

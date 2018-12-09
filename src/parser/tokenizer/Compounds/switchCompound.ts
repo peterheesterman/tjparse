@@ -19,7 +19,7 @@ interface $input {
   characterNumber: number
 }
 
-interface $output { jump: number, token: Token, error: Error }
+interface $output { endJump: number, token: Token, error: Error }
 
 const switchCompound = ({ 
   element,
@@ -28,15 +28,15 @@ const switchCompound = ({
   columnNumber,
   characterNumber
 }: $input): $output => {
-  let jump: number = -1
+  let endJump: number = -1
   let token: Token =  null
   let error: Error = null
 
   switch (element) {
     case doubleQuote:
-      jump = findEndOfWord(input, characterNumber)
-      if (jump !== -1) {
-        const wordLiteral = input.substr(characterNumber, jump + 1)
+      endJump = findEndOfWord(input, characterNumber)
+      if (endJump !== -1) {
+        const wordLiteral = input.substr(characterNumber, endJump + 1)
         token = new Word(wordLiteral, lineNumber, columnNumber)
       } else {
         error = new UnterminatedStringError(lineNumber, columnNumber)
@@ -49,7 +49,7 @@ const switchCompound = ({
 
       if (check(input, characterNumber)) {
         token = new tokenType(lineNumber, columnNumber)
-        jump = token.literal.length - 1
+        endJump = token.literal.length - 1
       } else {
         error = new UnexpectedTokenError(lineNumber, columnNumber)
       }
@@ -65,10 +65,10 @@ const switchCompound = ({
     case "7":
     case "8":
     case "9":
-      jump = findEndOfNumber(input, characterNumber)
-      if (jump !== -1) {
-        const numberLiteral = input.substr(characterNumber, jump)
-        jump -= 1
+      endJump = findEndOfNumber(input, characterNumber)
+      if (endJump !== -1) {
+        const numberLiteral = input.substr(characterNumber, endJump)
+        endJump -= 1
         token = new Number(numberLiteral, lineNumber, columnNumber)
       } else {
         error = new NumberParseError(lineNumber, columnNumber)
@@ -76,7 +76,7 @@ const switchCompound = ({
       break
   }
   return {
-    jump,
+    endJump,
     token,
     error
   }

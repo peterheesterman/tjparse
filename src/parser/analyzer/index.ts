@@ -9,6 +9,8 @@ const analyzer = (tokens: Array<Token>): AnalyzerResult => {
     console.log('analyzer: foreach - ', element)
   })
 
+  // Make the ast
+
   const abstractSyntaxTree = new AbstractSyntaxTree()
 
   const errors: Array<Error> = []

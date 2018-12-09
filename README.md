@@ -21,9 +21,13 @@ Stage 2:
 AST -> string
 ```
 
+## Tokenizer
+
+  - Tests were super helpful when i refactored the indexes.
+  - Refactoring the indexes was painful - think about it and do it right to start with
+
+
 ## Next steps
-  - make the tokenizer
-    - analyze weaknesses and stregths of the approach
   - make the analyzer
     - tests
     - document
