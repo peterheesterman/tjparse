@@ -26,9 +26,14 @@ AST -> string
   - Tests were super helpful when i refactored the indexes.
   - Refactoring the indexes was painful - think about it and do it right to start with
 
+## Analyzer
+
+  - switches are silly, replace most of them with objects/dictionaries
 
 ## Next steps
   - make the analyzer
+    - no longer returning nodes. When a node is created, it should add itself to the correct place in the tree
+    - write the processValue and processKey functions
     - tests
     - document
     - code

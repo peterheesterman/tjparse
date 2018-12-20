@@ -1,12 +1,11 @@
-import { AbstractSyntaxTreeRoot } from './AbstractSyntaxTreeRoot'
-import {  AbstractSyntaxTreeNode } from './AbstractSyntaxTreeNode'
+
+import { AbstractSyntaxTreeNode } from './AbstractSyntaxTreeNode'
 
 class AbstractSyntaxTree {
-  root: AbstractSyntaxTreeRoot
+  root: AbstractSyntaxTreeNode
 }
 
 export { 
   AbstractSyntaxTree,
-  AbstractSyntaxTreeRoot,
   AbstractSyntaxTreeNode
 }

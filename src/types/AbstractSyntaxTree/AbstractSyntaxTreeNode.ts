@@ -1,6 +1,7 @@
-class AbstractSyntaxTreeNode {
-  parent: AbstractSyntaxTreeNode
-  children: Array<AbstractSyntaxTreeNode>
+interface AbstractSyntaxTreeNode {
+  parent: AbstractSyntaxTreeNode | null
+  startTokenIndex: number
+  endTokenIndex: number
 }
 
 export { AbstractSyntaxTreeNode }
